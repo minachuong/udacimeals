@@ -5,6 +5,7 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
 import calendar from './reducers/index';
+import { Provider } from 'react-redux';
 
 const store = createStore(
   calendar,
@@ -12,7 +13,9 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <App store={ store }/>, 
+  <Provider store={ store }>
+    <App />
+  </Provider>, 
   document.getElementById('root')
 );
 registerServiceWorker();
