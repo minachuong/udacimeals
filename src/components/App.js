@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addRecipe, removeFromCalendar } from '../actions'
 
 class App extends Component {
   render() {
@@ -12,7 +13,7 @@ class App extends Component {
   };
 };
 
-function mapStateToProp(calendar) {
+function mapStateToProps(calendar) {
   const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
   return {
     calendar: dayOrder.map((day) => ({
@@ -26,6 +27,14 @@ function mapStateToProp(calendar) {
       }, {}),
     }))
   };
-};
+}
 
-export default connect(mapStateToProp)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    selectRecipe: (data) => dispatch(addRecipe(data)),
+    remove: (data) => dispatch(removeFromCalendar(data)), 
+  }
+  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
